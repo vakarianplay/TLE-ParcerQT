@@ -63,8 +63,8 @@ void MainWindow::localDB()
     //        qDebug() << "open";
     //    }
     dbQuery = new QSqlQuery(db);
-    dbQuery->exec(createTableTle);
-    dbQuery->exec(createMainTable);
+    //    dbQuery->exec(createTableTle);
+    //    dbQuery->exec(createMainTable);
 }
 
 void MainWindow::on_tableView_clicked(const QModelIndex &index)

@@ -51,7 +51,28 @@ void ConnectForm::connectLocal(QString filename)
     }
 }
 
+void ConnectForm::connectPostgres()
+{
+    db = QSqlDatabase::addDatabase("QPSQL");
+    db.setHostName(ui->lineEdit_host->text());
+    db.setPort(ui->lineEdit_port->text().toInt());
+    db.setDatabaseName(ui->lineEdit_db->text());
+    db.setUserName(ui->lineEdit_user->text());
+    db.setPassword(ui->lineEdit_pass->text());
+    if (!db.open()) {
+        qDebug() << "not open";
+        return;
+    } else {
+        qDebug() << "open postgres";
+    }
+}
+
 void ConnectForm::on_pushButton_connect_clicked()
+{
+    connectPostgres();
+}
+
+void ConnectForm::on_pushButton_open_clicked()
 {
     w = new MainWindow(db);
     w->show();

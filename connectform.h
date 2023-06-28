@@ -28,6 +28,8 @@ private slots:
 
     void on_pushButton_connect_clicked();
 
+    void on_pushButton_open_clicked();
+
 private:
     Ui::ConnectForm *ui;
     QSqlDatabase db;
