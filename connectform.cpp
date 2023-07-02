@@ -48,6 +48,7 @@ void ConnectForm::connectLocal(QString filename)
         return;
     } else {
         qDebug() << "open";
+        dbType = "QSQLITE";
     }
 }
 
@@ -64,6 +65,7 @@ void ConnectForm::connectPostgres()
         return;
     } else {
         qDebug() << "open postgres";
+        dbType = "QPSQL";
     }
 }
 
@@ -74,6 +76,6 @@ void ConnectForm::on_pushButton_connect_clicked()
 
 void ConnectForm::on_pushButton_open_clicked()
 {
-    w = new MainWindow(db);
+    w = new MainWindow(db, dbType);
     w->show();
 }

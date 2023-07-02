@@ -2,14 +2,15 @@
 #include "tableQuery.h"
 #include "ui_mainwindow.h"
 
-MainWindow::MainWindow(QSqlDatabase db_, QWidget *parent)
+MainWindow::MainWindow(QSqlDatabase db_, QString dbType_, QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     db = db_;
+    dbType = dbType_;
     TleParce = new TleAdd;
     //    connectDb();
-    localDB();
+    //    localDB();
     initTable();
 }
 
@@ -40,6 +41,8 @@ void MainWindow::connectDb()
 
 void MainWindow::initTable()
 {
+    dbQuery = new QSqlQuery(db);
+    checkExistTables();
     dbModel = new QSqlTableModel(this, db);
     dbModel->setTable("tle");
     dbModel->select();
@@ -65,6 +68,14 @@ void MainWindow::localDB()
     dbQuery = new QSqlQuery(db);
     //    dbQuery->exec(createTableTle);
     //    dbQuery->exec(createMainTable);
+}
+
+void MainWindow::checkExistTables()
+{
+    if (dbType == "QPSQL")
+        dbQuery->exec(createTableTlePostgres);
+    if (dbType == "QSQLITE")
+        dbQuery->exec(createTableTleLocal);
 }
 
 void MainWindow::on_tableView_clicked(const QModelIndex &index)
@@ -116,6 +127,7 @@ void MainWindow::on_pushButton_removeAll_clicked()
 {
     dbQuery->exec(dropTable);
     dbQuery->exec(dropTableCascade);
-    dbQuery->exec(createTableTle);
+    //    dbQuery->exec(createTableTle);
+    checkExistTables();
     dbModel->select();
 }

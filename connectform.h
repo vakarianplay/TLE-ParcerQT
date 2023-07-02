@@ -35,6 +35,8 @@ private:
     QSqlDatabase db;
     MainWindow *w;
 
+    QString dbType;
+
     void connectLocal(QString filename);
     void connectPostgres();
 };

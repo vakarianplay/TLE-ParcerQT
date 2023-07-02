@@ -19,7 +19,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    MainWindow(QSqlDatabase db_, QWidget *parent = nullptr);
+    MainWindow(QSqlDatabase db_, QString dbType_, QWidget *parent = nullptr);
     ~MainWindow();
 
 private slots:
@@ -43,10 +43,12 @@ private:
     QSqlTableModel *dbModel;
 
     TleAdd *TleParce = nullptr;
+    QString dbType;
 
     void connectDb();
     void initTable();
     void localDB();
+    void checkExistTables();
 
     int row;
     int rowJob;
