@@ -11,12 +11,11 @@ namespace Ui {
 class ConnectForm;
 }
 
-class ConnectForm : public QWidget
-{
+class ConnectForm : public QWidget {
     Q_OBJECT
 
 public:
-    explicit ConnectForm(QWidget *parent = nullptr);
+    explicit ConnectForm(QWidget* parent = nullptr);
     ~ConnectForm();
 
 private slots:
@@ -31,14 +30,16 @@ private slots:
     void on_pushButton_open_clicked();
 
 private:
-    Ui::ConnectForm *ui;
+    Ui::ConnectForm* ui;
     QSqlDatabase db;
-    MainWindow *w;
+    MainWindow* w;
 
     QString dbType;
 
     void connectLocal(QString filename);
     void connectPostgres();
+    void connectSuccess();
+    void connectFail();
 };
 
 #endif // CONNECTFORM_H

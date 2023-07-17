@@ -22,6 +22,7 @@ void ConnectForm::on_radioButton_sqlite_clicked()
     ui->formLayoutWidget->setEnabled(false);
     ui->horizontalLayoutWidget_2->setEnabled(true);
     ui->pushButton_open->setEnabled(false);
+    ui->label_connectstatus->clear();
 }
 
 void ConnectForm::on_radioButton_postgres_clicked()
@@ -29,6 +30,7 @@ void ConnectForm::on_radioButton_postgres_clicked()
     ui->horizontalLayoutWidget_2->setEnabled(false);
     ui->formLayoutWidget->setEnabled(true);
     ui->pushButton_open->setEnabled(false);
+    ui->label_connectstatus->clear();
 }
 
 void ConnectForm::on_pushButton_browse_clicked()
@@ -67,12 +69,27 @@ void ConnectForm::connectPostgres()
     db.setPassword(ui->lineEdit_pass->text());
     if (!db.open()) {
         qDebug() << "not open";
+        connectFail();
         return;
     } else {
         qDebug() << "open postgres";
         dbType = "QPSQL";
-        ui->pushButton_open->setEnabled(true);
+        connectSuccess();
     }
+}
+
+void ConnectForm::connectSuccess()
+{
+    ui->label_connectstatus->setText("Success ✔");
+    ui->label_connectstatus->setStyleSheet("QLabel { color : green; }");
+    ui->pushButton_open->setEnabled(true);
+}
+
+void ConnectForm::connectFail()
+{
+    ui->label_connectstatus->setText("Incorrect user/pass ❌");
+    ui->label_connectstatus->setStyleSheet("QLabel { color : red; }");
+    ui->pushButton_open->setEnabled(false);
 }
 
 void ConnectForm::on_pushButton_connect_clicked()
