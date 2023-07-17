@@ -1,13 +1,15 @@
 #include "connectform.h"
 #include "ui_connectform.h"
 
-ConnectForm::ConnectForm(QWidget *parent) :
-      QWidget(parent),
-      ui(new Ui::ConnectForm)
+ConnectForm::ConnectForm(QWidget* parent)
+    : QWidget(parent)
+    , ui(new Ui::ConnectForm)
 {
     ui->setupUi(this);
     ui->radioButton_sqlite->setChecked(true);
     ui->formLayoutWidget->setEnabled(false);
+    ui->pushButton_open->setEnabled(false);
+    ui->lineEdit_pass->setEchoMode(QLineEdit::Password);
 }
 
 ConnectForm::~ConnectForm()
@@ -19,20 +21,22 @@ void ConnectForm::on_radioButton_sqlite_clicked()
 {
     ui->formLayoutWidget->setEnabled(false);
     ui->horizontalLayoutWidget_2->setEnabled(true);
+    ui->pushButton_open->setEnabled(false);
 }
 
 void ConnectForm::on_radioButton_postgres_clicked()
 {
     ui->horizontalLayoutWidget_2->setEnabled(false);
     ui->formLayoutWidget->setEnabled(true);
+    ui->pushButton_open->setEnabled(false);
 }
 
 void ConnectForm::on_pushButton_browse_clicked()
 {
     QString filename = QFileDialog::getOpenFileName(0,
-                                                    "SQLite database file",
-                                                    "",
-                                                    "*.db"); //open file
+        "SQLite database file",
+        "",
+        "*.db"); //open file
     QFile file(filename);
     ui->lineEdit_path->setText(filename);
     connectLocal(filename);
@@ -49,6 +53,7 @@ void ConnectForm::connectLocal(QString filename)
     } else {
         qDebug() << "open";
         dbType = "QSQLITE";
+        ui->pushButton_open->setEnabled(true);
     }
 }
 
@@ -66,6 +71,7 @@ void ConnectForm::connectPostgres()
     } else {
         qDebug() << "open postgres";
         dbType = "QPSQL";
+        ui->pushButton_open->setEnabled(true);
     }
 }
 

@@ -11,38 +11,37 @@
 #include <QStandardItemModel>
 
 QT_BEGIN_NAMESPACE
-namespace Ui { class MainWindow; }
+namespace Ui {
+class MainWindow;
+}
 QT_END_NAMESPACE
 
-class MainWindow : public QMainWindow
-{
+class MainWindow : public QMainWindow {
     Q_OBJECT
 
 public:
-    MainWindow(QSqlDatabase db_, QString dbType_, QWidget *parent = nullptr);
+    MainWindow(QSqlDatabase db_, QString dbType_, QWidget* parent = nullptr);
     ~MainWindow();
 
 private slots:
 
-
-    void on_tableView_clicked(const QModelIndex &index);
+    void on_tableView_clicked(const QModelIndex& index);
 
     void on_pushButton_tle_clicked();
 
     void addTleRec();
 
-    void on_comboBox_currentIndexChanged(const QString &arg1);
+    void on_comboBox_currentIndexChanged(const QString& arg1);
 
     void on_pushButton_removeAll_clicked();
 
-
 private:
-    Ui::MainWindow *ui;
+    Ui::MainWindow* ui;
     QSqlDatabase db;
-    QSqlQuery *dbQuery;
-    QSqlTableModel *dbModel;
+    QSqlQuery* dbQuery;
+    QSqlTableModel* dbModel;
 
-    TleAdd *TleParce = nullptr;
+    TleAdd* TleParce = nullptr;
     QString dbType;
 
     void connectDb();

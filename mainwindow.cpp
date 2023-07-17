@@ -2,8 +2,9 @@
 #include "tableQuery.h"
 #include "ui_mainwindow.h"
 
-MainWindow::MainWindow(QSqlDatabase db_, QString dbType_, QWidget *parent)
-    : QMainWindow(parent), ui(new Ui::MainWindow)
+MainWindow::MainWindow(QSqlDatabase db_, QString dbType_, QWidget* parent)
+    : QMainWindow(parent)
+    , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     db = db_;
@@ -78,7 +79,7 @@ void MainWindow::checkExistTables()
         dbQuery->exec(createTableTleLocal);
 }
 
-void MainWindow::on_tableView_clicked(const QModelIndex &index)
+void MainWindow::on_tableView_clicked(const QModelIndex& index)
 {
     row = index.row();
 
@@ -99,6 +100,7 @@ void MainWindow::addTleRec()
 {
     dbModel->setTable("tle");
     ui->comboBox->setCurrentText("TLE");
+
     for (int i = 0; i < TleParce->toMain().count(); i++) {
         QStringList tempList = TleParce->toMain().at(i);
         ui->progressBar->setMaximum(TleParce->toMain().count());
@@ -115,13 +117,12 @@ void MainWindow::addTleRec()
     dbQuery->exec(insertMain);
 }
 
-void MainWindow::on_comboBox_currentIndexChanged(const QString &arg1)
+void MainWindow::on_comboBox_currentIndexChanged(const QString& arg1)
 {
     qDebug() << ui->comboBox->currentText();
     dbModel->setTable(ui->comboBox->currentText());
     dbModel->select();
 }
-
 
 void MainWindow::on_pushButton_removeAll_clicked()
 {

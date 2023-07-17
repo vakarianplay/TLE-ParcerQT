@@ -175,6 +175,13 @@
        </spacer>
       </item>
       <item>
+       <widget class="QLabel" name="label_connectstatus">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QPushButton" name="pushButton_connect">
         <property name="maximumSize">
          <size>
