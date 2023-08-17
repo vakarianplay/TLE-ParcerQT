@@ -36,6 +36,22 @@ void TleAdd::openFile(bool checkGeo)
 void TleAdd::getRequest(quint16 noradNum)
 {
     qDebug() << noradNum;
+
+    //    manager = new QNetworkAccessManager();
+    //    QObject::connect(manager, &QNetworkAccessManager::finished,
+    //        this, [=](QNetworkReply* reply) {
+    //            if (reply->error()) {
+    //                qDebug() << reply->errorString();
+    //                return;
+    //            }
+
+    //            QString answer = reply->readAll();
+
+    //            qDebug() << answer;
+    //        });
+
+    //    request.setUrl(QUrl("https://celestrak.org/NORAD/elements/gp.php?CATNR=25544&FORMAT=TLE"));
+    //    manager->get(request);
 }
 
 void TleAdd::readyForRec()
