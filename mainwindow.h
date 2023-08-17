@@ -31,9 +31,15 @@ private slots:
 
     void addTleRec();
 
+    void netTleRec();
+
     void on_comboBox_currentIndexChanged(const QString& arg1);
 
     void on_pushButton_removeAll_clicked();
+
+    void on_pushButton_loadurl_clicked();
+
+    void on_lineEdit_norad_textChanged(const QString& arg1);
 
 private:
     Ui::MainWindow* ui;

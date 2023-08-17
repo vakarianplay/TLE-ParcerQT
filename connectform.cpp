@@ -10,6 +10,22 @@ ConnectForm::ConnectForm(QWidget* parent)
     ui->formLayoutWidget->setEnabled(false);
     ui->pushButton_open->setEnabled(false);
     ui->lineEdit_pass->setEchoMode(QLineEdit::Password);
+
+    //    manager = new QNetworkAccessManager();
+    //    QObject::connect(manager, &QNetworkAccessManager::finished,
+    //        this, [=](QNetworkReply* reply) {
+    //            if (reply->error()) {
+    //                qDebug() << reply->errorString();
+    //                return;
+    //            }
+
+    //            QString answer = reply->readAll();
+
+    //            qDebug() << answer;
+    //        });
+
+    //    request.setUrl(QUrl("https://celestrak.org/NORAD/elements/gp.php?CATNR=25544&FORMAT=TLE"));
+    //    manager->get(request);
 }
 
 ConnectForm::~ConnectForm()

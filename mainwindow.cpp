@@ -47,6 +47,7 @@ void MainWindow::initTable()
     dbModel->select();
     ui->tableView->setModel(dbModel);
     ui->comboBox->setCurrentText("TLE");
+    ui->pushButton_loadurl->setEnabled(false);
 
     //    ui->tableView->setDefaultDropAction(Qt::MoveAction);
 
@@ -115,6 +116,13 @@ void MainWindow::addTleRec()
     dbQuery->exec(insertMain);
 }
 
+void MainWindow::netTleRec()
+{
+    quint16 noradNum;
+    noradNum = ui->lineEdit_norad->text().toInt();
+    TleParce->getRequest(noradNum);
+}
+
 void MainWindow::on_comboBox_currentIndexChanged(const QString& arg1)
 {
     qDebug() << ui->comboBox->currentText();
@@ -129,4 +137,20 @@ void MainWindow::on_pushButton_removeAll_clicked()
     //    dbQuery->exec(createTableTle);
     checkExistTables();
     dbModel->select();
+}
+
+void MainWindow::on_pushButton_loadurl_clicked()
+{
+    netTleRec();
+}
+
+void MainWindow::on_lineEdit_norad_textChanged(const QString& arg1)
+{
+    QString textCheck;
+    textCheck = ui->lineEdit_norad->text();
+    //    qDebug() << textCheck.length();
+    if (textCheck > 1)
+        ui->pushButton_loadurl->setEnabled(true);
+    else
+        ui->pushButton_loadurl->setEnabled(false);
 }

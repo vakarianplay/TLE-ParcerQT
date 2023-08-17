@@ -1,6 +1,7 @@
 #include "tleadd.h"
 
-TleAdd::TleAdd(QObject *parent) : QObject(parent)
+TleAdd::TleAdd(QObject* parent)
+    : QObject(parent)
 {
     qDebug() << "tle class";
 }
@@ -32,6 +33,11 @@ void TleAdd::openFile(bool checkGeo)
     }
 }
 
+void TleAdd::getRequest(quint16 noradNum)
+{
+    qDebug() << noradNum;
+}
+
 void TleAdd::readyForRec()
 {
     if (geoFlag) {
@@ -50,31 +56,31 @@ QVector<QStringList> TleAdd::toMain()
 void TleAdd::parceTLE(QString read_string)
 {
     if (read_string.at(0) == "1") {
-        oneTle.append(read_string.mid(2, 5).remove(" "));   // 2
-        oneTle.append(read_string.mid(7, 1).remove(" "));   // 3
-        oneTle.append(read_string.mid(9, 2).remove(" "));   // 4
-        oneTle.append(read_string.mid(11, 3).remove(" "));  // 5
-        oneTle.append(read_string.mid(14, 3).remove(" "));  // 6
-        oneTle.append(read_string.mid(18, 2).remove(" "));  // 7
+        oneTle.append(read_string.mid(2, 5).remove(" ")); // 2
+        oneTle.append(read_string.mid(7, 1).remove(" ")); // 3
+        oneTle.append(read_string.mid(9, 2).remove(" ")); // 4
+        oneTle.append(read_string.mid(11, 3).remove(" ")); // 5
+        oneTle.append(read_string.mid(14, 3).remove(" ")); // 6
+        oneTle.append(read_string.mid(18, 2).remove(" ")); // 7
         oneTle.append(read_string.mid(20, 12).remove(" ")); // 8
         oneTle.append(read_string.mid(33, 10).remove(" ")); // 9
-        oneTle.append(read_string.mid(44, 8).remove(" "));  // 10
-        oneTle.append(read_string.mid(53, 8).remove(" "));  // 11
-        oneTle.append(read_string.mid(62, 1).remove(" "));  // 12
-        oneTle.append(read_string.mid(64, 4).remove(" "));  // 13
-        oneTle.append(read_string.mid(68, 1).remove(" "));  // 14
+        oneTle.append(read_string.mid(44, 8).remove(" ")); // 10
+        oneTle.append(read_string.mid(53, 8).remove(" ")); // 11
+        oneTle.append(read_string.mid(62, 1).remove(" ")); // 12
+        oneTle.append(read_string.mid(64, 4).remove(" ")); // 13
+        oneTle.append(read_string.mid(68, 1).remove(" ")); // 14
     }
 
     if (read_string.at(0) == "2") {
-        oneTle.append(read_string.mid(2, 5).remove(" "));   // 2
-        oneTle.append(read_string.mid(8, 8).remove(" "));   // 3
-        oneTle.append(read_string.mid(17, 8).remove(" "));  // 4
-        oneTle.append(read_string.mid(26, 7).remove(" "));  // 5
-        oneTle.append(read_string.mid(34, 8).remove(" "));  // 6
-        oneTle.append(read_string.mid(43, 8).remove(" "));  // 7
+        oneTle.append(read_string.mid(2, 5).remove(" ")); // 2
+        oneTle.append(read_string.mid(8, 8).remove(" ")); // 3
+        oneTle.append(read_string.mid(17, 8).remove(" ")); // 4
+        oneTle.append(read_string.mid(26, 7).remove(" ")); // 5
+        oneTle.append(read_string.mid(34, 8).remove(" ")); // 6
+        oneTle.append(read_string.mid(43, 8).remove(" ")); // 7
         oneTle.append(read_string.mid(52, 11).remove(" ")); // 8
-        oneTle.append(read_string.mid(63, 5).remove(" "));  // 9
-        oneTle.append(read_string.mid(68, 1).remove(" "));  // 10
+        oneTle.append(read_string.mid(63, 5).remove(" ")); // 9
+        oneTle.append(read_string.mid(68, 1).remove(" ")); // 10
     }
     if (oneTle.length() == 23)
         readyForRec();

@@ -6,13 +6,13 @@
 #include <QObject>
 #include <QWidget>
 
-class TleAdd : public QObject
-{
+class TleAdd : public QObject {
     Q_OBJECT
 public:
-    TleAdd(QObject *parent = 0);
+    TleAdd(QObject* parent = 0);
     ~TleAdd();
     void openFile(bool checkGeo);
+    void getRequest(quint16 noradNum);
     QVector<QStringList> toMain();
 
 private:
