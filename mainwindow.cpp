@@ -10,8 +10,6 @@ MainWindow::MainWindow(QSqlDatabase db_, QString dbType_, QWidget* parent)
     db = db_;
     dbType = dbType_;
     TleParce = new TleAdd;
-    //    connectDb();
-    //    localDB();
     initTable();
 }
 
@@ -66,7 +64,7 @@ void MainWindow::localDB()
     //    } else {
     //        qDebug() << "open";
     //    }
-    dbQuery = new QSqlQuery(db);
+    //    dbQuery = new QSqlQuery(db);
     //    dbQuery->exec(createTableTle);
     //    dbQuery->exec(createMainTable);
 }
