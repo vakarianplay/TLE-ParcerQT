@@ -5,6 +5,8 @@
 #include <QFileDialog>
 #include <QObject>
 #include <QWidget>
+#include <QtNetwork/QNetworkAccessManager>
+#include <QtNetwork/QNetworkReply>
 
 class TleAdd : public QObject {
     Q_OBJECT
@@ -18,10 +20,15 @@ public:
 private:
     void parceTLE(QString read_string);
     void readyForRec();
+    void netManager();
+    void formatAnswerTLE(QString answerTLE);
 
     QStringList oneTle;
     QVector<QStringList> vectorBase;
     bool geoFlag;
+
+    QNetworkAccessManager* manager;
+    QNetworkRequest request;
 };
 
 #endif // TLEADD_H

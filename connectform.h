@@ -7,8 +7,6 @@
 #include <QFileDialog>
 #include <QSqlDatabase>
 #include <QWidget>
-#include <QtNetwork/QNetworkAccessManager>
-#include <QtNetwork/QNetworkReply>
 
 namespace Ui {
 class ConnectForm;
@@ -43,9 +41,6 @@ private:
     void connectPostgres();
     void connectSuccess();
     void connectFail();
-
-    QNetworkAccessManager* manager;
-    QNetworkRequest request;
 };
 
 #endif // CONNECTFORM_H

@@ -4,6 +4,7 @@ TleAdd::TleAdd(QObject* parent)
     : QObject(parent)
 {
     qDebug() << "tle class";
+    netManager();
 }
 
 TleAdd::~TleAdd()
@@ -36,22 +37,10 @@ void TleAdd::openFile(bool checkGeo)
 void TleAdd::getRequest(quint16 noradNum)
 {
     qDebug() << noradNum;
-
-    //    manager = new QNetworkAccessManager();
-    //    QObject::connect(manager, &QNetworkAccessManager::finished,
-    //        this, [=](QNetworkReply* reply) {
-    //            if (reply->error()) {
-    //                qDebug() << reply->errorString();
-    //                return;
-    //            }
-
-    //            QString answer = reply->readAll();
-
-    //            qDebug() << answer;
-    //        });
-
-    //    request.setUrl(QUrl("https://celestrak.org/NORAD/elements/gp.php?CATNR=25544&FORMAT=TLE"));
-    //    manager->get(request);
+    QString reqUrl = "https://celestrak.org/NORAD/elements/gp.php?CATNR={NORAD}&FORMAT=TLE";
+    reqUrl.replace("{NORAD}", QString::number(noradNum));
+    request.setUrl(QUrl(reqUrl));
+    manager->get(request);
 }
 
 void TleAdd::readyForRec()
@@ -62,6 +51,29 @@ void TleAdd::readyForRec()
     } else {
         vectorBase.append(oneTle);
     }
+}
+
+void TleAdd::netManager()
+{
+    manager = new QNetworkAccessManager();
+    QObject::connect(manager, &QNetworkAccessManager::finished,
+        this, [=](QNetworkReply* reply) {
+            if (reply->error()) {
+                qDebug() << reply->errorString();
+                return;
+            }
+
+            QString answerTLE = reply->readAll();
+            formatAnswerTLE(answerTLE);
+        });
+}
+
+void TleAdd::formatAnswerTLE(QString answerTLE)
+{
+    answerTLE.remove("\r\n1");
+    answerTLE.remove("\r\n2");
+    answerTLE.remove("\r\n");
+    qDebug() << answerTLE;
 }
 
 QVector<QStringList> TleAdd::toMain()
